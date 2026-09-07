@@ -1,73 +1,125 @@
-# ⚡ Nodus — Sistema de Produtividade, Foco & Execução
+# ⚡ Nodus — Sistema Integrado de Produtividade, Foco & Execução
 
-O **Nodus** é um aplicativo completo de produtividade pessoal e consistência diária, desenvolvido para ser rápido, modular e 100% focado no essencial.
-
-Esta versão é a **base limpa** (sem nenhum dado prévio cadastrado), pronta para você utilizar ou compartilhar com outras pessoas.
+O **Nodus** é um sistema completo de gestão de rotina, produtividade pessoal e consistência diária. Desenvolvido para ser leve, rápido, privativo e sem fricção, ele integra planejamento diário, controle de hábitos, tarefas com prioridades, agenda, finanças, fichas de treino, controle de leituras, diário reflexivo e um assistente inteligente ativo com inteligência artificial (**Krux**).
 
 ---
 
-## 🚀 Funcionalidades Integradas
+## ✨ Funcionalidades Principais
 
-- 🎯 **Dashboard Principal**: Saudação inteligente, visão rápida das prioridades do dia, plano diário (esperado do dia, foco principal e gratidão), widget financeiro e score de consistência.
-- ✅ **Tarefas**: Gestão com níveis de prioridade (*Alta*, *Normal*, *Baixa*), filtros por status, busca em tempo real e ordenação.
-- 🌱 **Hábitos**: Acompanhamento de hábitos diários com contagem automática de sequências (*streaks*).
-- 📅 **Agenda**: Compromissos e reuniões organizados por data e horário.
-- 💳 **Finanças**: Controle de receitas e despesas com categorização e saldo líquido em tempo real.
-- 🔥 **Desafios**: Crie desafios de consistência personalizados (ex: 21 dias) com metas, pilares e check-ins diários.
-- 🏋️ **Treinos**: Organização de divisões de treino com séries, repetições, cargas e histórico de execução.
-- 📱 **Conteúdo**: Calendário e roteirização para redes sociais (Instagram, YouTube, etc.).
-- 📚 **Leitura**: Acompanhamento de livros com progresso de páginas lidas, notas e status.
-- 📔 **Diário**: Registro reflexivo matinal e noturno com humor e lições do dia.
-- 🤖 **Krux IA**: Assistente de inteligência artificial de foco e execução. Possui um **Motor NLP Local 100% Offline** (interpreta comandos em linguagem natural e agenda compromissos, cria tarefas ou registra finanças de forma instantânea sem precisar de internet ou chaves) e **suporte opcional a modelos Gemini** na nuvem.
-
----
-
-## 📋 Pré-requisitos
-
-Para rodar o Nodus no seu computador, certifique-se de ter instalado:
-
-1. **Node.js** (versão 18 ou superior) — [Download oficial](https://nodejs.org/)
-2. Gerenciador de pacotes **npm** (já incluso no Node.js), **pnpm**, **yarn** ou **bun**.
-3. *(Opcional para versão Desktop Nativa)*: Rust e Cargo para compilação com Tauri — [Guia oficial do Tauri](https://tauri.app/start/prerequisites/).
+- 🎯 **Dashboard Integrado**: Visão geral do dia, saudação inteligente, bloco de foco matinal (*O que você espera do dia*, *Principal tarefa* e *Gratidão*), resumo financeiro e score de consistência.
+- ✅ **Gestão de Tarefas**: Criação e controle de tarefas com níveis de prioridade (*Alta*, *Normal*, *Baixa*), datas de entrega, horários e filtros por status.
+- 🌱 **Rastreador de Hábitos**: Acompanhamento diário com cálculo automático de sequências ativas (*streaks*).
+- 📅 **Agenda de Compromissos**: Visualização diária, semanal e mensal de reuniões e eventos.
+- 💳 **Finanças Pessoais**: Lançamento de receitas e despesas com categorização e cálculo automático do saldo líquido.
+- 🔥 **Desafios de Consistência**: Desafios personalizáveis (ex: 21 dias) com metas, pilares e sistema de check-in diário.
+- 🏋️ **Divisões de Treino**: Organização de treinos com exercícios, séries, repetições, cargas e anotações.
+- 📱 **Planejamento de Conteúdo**: Criação e roteirização de posts para redes sociais (Instagram, YouTube, etc.).
+- 📚 **Controle de Leitura**: Acompanhamento de livros com barra de progresso por páginas lidas e notas.
+- 📔 **Diário Pessoal**: Registros matinais e noturnos para reflexão, lições e acompanhamento de humor.
+- 🤖 **IA Krux (Assistente de Foco e Execução)**:
+  - **Motor Local Offline (Zero Configuração)**: Interpreta comandos em linguagem natural em português (*"marca reunião amanhã às 15h"*, *"tenho uma tarefa urgente: enviar proposta"*, *"gastei 45 no almoço"*) e executa ações reais no banco de dados em milissegundos sem precisar de internet ou chave de API.
+  - **Suporte a IA em Nuvem (Google Gemini)**: Quando configurado com uma chave de API, permite diálogos abertos, análise de produtividade e mentoria personalizada.
 
 ---
 
-## 🛠️ Passo a Passo de Instalação (Mini Tutorial)
+## 🛠️ Tecnologias Utilizadas
 
-### 1. Baixar o projeto
-Extraia os arquivos do projeto em uma pasta no seu computador ou clone o repositório via terminal:
-```bash
-git clone <url-do-repositorio>
-cd nodus
+- **Frontend**: JavaScript (ESNext modular), HTML5, CSS3 com variáveis dinâmicas para temas Dark/Light.
+- **Estilização**: Tailwind CSS v4.
+- **Backend**: Node.js, Express, TypeScript (`tsx`).
+- **Persistência**: Arquivo local `db.json` com sincronização resiliente em `localStorage`.
+- **Inteligência Artificial**: Motor NLP Local próprio + SDK `@google/genai` (Gemini 3.8 / 2.5).
+- **Desktop Nativo**: [Tauri v2](https://tauri.app/) (Rust) para empacotamento em instaladores nativos leves.
+- **Build System**: Vite 6, esbuild.
+
+---
+
+## 📂 Estrutura do Projeto
+
+```text
+Nodus/
+├── server/                     # Backend Express modular
+│   ├── routes/
+│   │   └── apiRoutes.ts        # Rotas da API (/api/db, /api/krux/chat)
+│   └── services/
+│       ├── geminiService.ts    # Conexão com a API do Google Gemini
+│       └── kruxEngine.ts       # Motor NLP local e executor de ações do Krux
+│
+├── src/                        # Código-fonte da interface do usuário
+│   ├── main.js                 # Ponto de entrada da aplicação
+│   ├── core/                   # Inicialização (app.js) e roteador (router.js)
+│   ├── components/             # Componentes de UI (Header, Sidebar, Modais, Toasts)
+│   ├── modules/                # Módulos funcionais (Dashboard, Tarefas, Agenda, etc.)
+│   ├── services/               # Camada de armazenamento e NLP client-side
+│   ├── utils/                  # Utilitários de data, ícones e prioridade
+│   └── styles/                 # Folha de estilos e variáveis CSS
+│
+├── src-tauri/                  # Código Rust e manifesto de configuração do Tauri
+├── docs/                       # Documentação técnica e guia de arquitetura
+├── public/                     # Ícones, favicons e manifestos estáticos
+├── server.ts                   # Servidor Express integrado com Vite
+├── vite.config.ts              # Configurações do Vite
+├── tsconfig.json               # Configurações do TypeScript
+├── package.json                # Dependências e scripts do projeto
+├── .env.example                # Modelo de variáveis de ambiente
+└── .gitignore                  # Arquivos ignorados pelo Git
 ```
 
-### 2. Instalar as dependências
-Abra o terminal na pasta do projeto e instale as dependências:
+---
+
+## 🚀 Como Instalar e Executar
+
+### 1. Pré-requisitos
+- **Node.js** (versão 18 ou superior) — [Baixar Node.js](https://nodejs.org/)
+- **npm** (incluso com o Node.js), **pnpm** ou **yarn**.
+- *(Opcional para versão Desktop)*: Rust e Cargo instalados para compilar via Tauri.
+
+### 2. Clonar e Instalar Dependências
 ```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/nodus.git
+cd nodus
+
+# Instale as dependências
 npm install
 ```
 
-### 3. Configurar as variáveis de ambiente (Opcional)
-Copie o arquivo de exemplo `.env.example` para `.env`:
+### 3. Configurar Variáveis de Ambiente (Opcional)
+Copie o modelo de ambiente:
 ```bash
 cp .env.example .env
 ```
-> **Nota sobre o Krux:** O aplicativo funciona perfeitamente sem nenhuma chave configurada graças ao seu **Motor Local Offline**. Caso queira habilitar o modo em nuvem com Gemini para conversas ampliadas, adicione sua chave em `GEMINI_API_KEY` dentro do arquivo `.env`.
+
+> ⚠️ **AVISO DE SEGURANÇA:**
+> **Nunca publique seu arquivo `.env` ou sua chave de API no GitHub!** O arquivo `.env` já está listado no `.gitignore` para evitar vazamentos acidentais.
+
+#### Como obter e configurar a chave da API Gemini (Opcional):
+1. Acesse o [Google AI Studio](https://aistudio.google.com/app/apikey).
+2. Faça login com sua conta Google e clique em **"Create API key"**.
+3. Copie a chave gerada e cole no seu arquivo `.env`:
+   ```env
+   GEMINI_API_KEY="sua_chave_aqui"
+   ```
+*(Caso não adicione a chave, o Nodus continuará funcionando 100% com o seu **Motor Krux Local Offline**).*
 
 ---
 
-## 💻 Como Executar a Aplicação
+## 💻 Executando em Desenvolvimento (Modo Web)
 
-### Modo Web (Navegador)
 Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
-Abra seu navegador e acesse:
+
+Abra seu navegador no endereço:
 👉 **`http://localhost:3000`**
 
-### Gerar Build de Produção (Web)
-Para compilar e iniciar a versão de produção otimizada:
+Para verificar a integridade do código e tipos:
+```bash
+npm run lint
+```
+
+Para compilar o pacote de produção para web:
 ```bash
 npm run build
 npm start
@@ -75,54 +127,35 @@ npm start
 
 ---
 
-## 🖥️ Executando como Aplicativo Desktop Nativo (macOS, Windows, Linux)
+## 🖥️ Gerando o Aplicativo Desktop Nativo (Tauri)
 
-O Nodus foi projetado para rodar nativamente via **Tauri**:
+O Nodus pode ser executado e empacotado como um aplicativo nativo para **macOS**, **Windows** ou **Linux**:
 
-- **Iniciar em modo Desktop interativo:**
-  ```bash
-  npm run tauri:dev
-  ```
-
-- **Gerar o executável instalador final (.app / .dmg no Mac, .exe / .msi no Windows):**
-  ```bash
-  npm run tauri:build
-  ```
-  O binário compilado estará localizado na pasta `src-tauri/target/release/bundle/`.
-
----
-
-## 🔒 Privacidade e Armazenamento dos Dados
-
-- **100% Local e Privado**: Todos os seus dados são gravados localmente no arquivo `db.json` na raiz do projeto e espelhados de forma resiliente no `localStorage` do seu navegador.
-- **Zero Rastreamento**: Nenhuma informação pessoal, tarefa, diário ou transação financeira é enviada para servidores externos sem o seu consentimento.
-- **Backup Simples**: Para fazer backup ou migrar seus dados para outro computador, basta copiar o arquivo `db.json`.
-
----
-
-## 📁 Estrutura do Projeto
-
-```text
-├── db.json                 # Banco de dados local (inicia limpo)
-├── server.ts               # Servidor Express com API local (/api/db) e Krux
-├── vite.config.ts          # Configuração do Vite e Tailwind CSS
-├── index.html              # Ponto de entrada da interface
-├── src/
-│   ├── core/               # Inicialização, router e ciclo de vida da aplicação
-│   ├── components/         # Header, Sidebar retrátil, Modais e Toasts
-│   ├── modules/            # Módulos: Dashboard, Tarefas, Agenda, Hábitos, Finanças,
-│   │                       # Desafios, Treinos, Conteúdo, Leitura, Diário, Perfil e Krux
-│   ├── services/           # storageService (persistência) e kruxLocalEngine (NLP offline)
-│   ├── styles/             # Estilos globais (main.css) e temas Dark/Light
-│   └── utils/              # Manipulação de datas, ícones e prioridades
-└── src-tauri/              # Configuração e código Rust para empacotamento Desktop
+### Executar em modo Desktop (Desenvolvimento):
+```bash
+npm run tauri:dev
 ```
 
+### Gerar os instaladores finais para produção:
+```bash
+npm run tauri:build
+```
+
+Os executáveis instaladores serão gerados na pasta `src-tauri/target/release/bundle/`:
+- **macOS**: `.dmg` e `.app`
+- **Windows**: `.msi` e `.exe`
+- **Linux**: `.deb` e `.AppImage`
+
 ---
 
-## 🎨 Personalização
+## 🔒 Privacidade de Dados
 
-Ao abrir o Nodus pela primeira vez:
-1. Acesse o menu **Meu Perfil** no rodapé da barra lateral esquerda.
-2. Digite seu **Nome Completo** para personalizar as saudações do Dashboard e do Krux.
-3. Escolha seu tema favorito (**Modo Escuro** ou **Modo Claro**) e a cor de destaque desejada.
+- Todos os seus dados são salvos no arquivo `db.json` no próprio computador e espelhados no `localStorage` do navegador.
+- O aplicativo não possui telemetria oculta nem envia seus registros para bancos de dados na nuvem.
+- Para fazer backup dos seus dados, basta copiar o arquivo `db.json`.
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.

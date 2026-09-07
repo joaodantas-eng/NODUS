@@ -1,5 +1,6 @@
 {
-  "name": "produtividade",
+  "name": "nodus",
+  "description": "Nodus — Sistema integrado de produtividade, foco e execução com IA Krux",
   "private": true,
   "version": "0.1.0",
   "type": "module",
