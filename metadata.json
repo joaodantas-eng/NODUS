@@ -1,0 +1,8 @@
+{
+  "name": "versao pra outros",
+  "description": "Aplicativo Nodus de produtividade limpo para novos usuários com Dashboard, Tarefas, Hábitos, Agenda, Finanças, Desafios, Treinos, Leitura e IA Krux.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

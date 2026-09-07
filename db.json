@@ -1,0 +1,40 @@
+{
+  "tasks": [],
+  "habits": [],
+  "events": [],
+  "notes": [],
+  "finances": {
+    "transactions": []
+  },
+  "challenges": [],
+  "workouts": [],
+  "content": [],
+  "reading": [],
+  "diary": [],
+  "dailyPlan": {
+    "expectedOfDay": "",
+    "mainTask": "",
+    "gratitude": ""
+  },
+  "settings": {
+    "theme": "dark",
+    "accentColor": "orange",
+    "user": {
+      "name": "",
+      "username": "",
+      "email": ""
+    },
+    "koreProactive": true,
+    "morningBriefing": "07:00",
+    "nightSummary": true,
+    "timezone": "America/Sao_Paulo",
+    "menuItems": {
+      "habits": true,
+      "workouts": true,
+      "content": true,
+      "notes": true,
+      "reading": true,
+      "diary": true
+    }
+  }
+}
