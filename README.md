@@ -77,7 +77,7 @@ Nodus/
 ### 2. Clonar e Instalar Dependências
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/nodus.git
+git clone https://github.com/joaodantas-eng/NODUS.git
 cd nodus
 
 # Instale as dependências
